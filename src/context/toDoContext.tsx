@@ -3,10 +3,11 @@ import { IToDoContext } from "../interfaces/interfaces";
 
 const initialContext: IToDoContext = {
     toDoList: [],
+    styleMode: 'light',
+    filter: 'all',
     addTodo: () => {},
     removeTodo: () => {},
     toggleStyleMode: () => {},
-    styleMode: 'light',
     toggleTodoCompleted: () => {},
     clearCompleted: () => {}
 }

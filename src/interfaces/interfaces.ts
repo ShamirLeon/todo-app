@@ -5,13 +5,17 @@ export interface ITodo {
 }
 
 export interface IToDoContext {
+    /* STATES */
     toDoList: ITodo[];
     styleMode: 'light' | 'dark';
+    filter: 'all' | 'active' | 'completed';
+    /* FUNCTIONS */
     addTodo: (todo: ITodo) => void;
     removeTodo: (id?: number) => void;
     toggleStyleMode: () => void;
     toggleTodoCompleted: (id?: number) => void;
     clearCompleted: () => void;
+    filterToDoList: ({ filter }: { filter: 'all' | 'active' | 'completed' }) =>void;
 }
 export enum Breakpoints {
     mobile = '375',

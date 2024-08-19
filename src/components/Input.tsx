@@ -11,7 +11,7 @@ import { IInput } from '../interfaces/interfaces';
 
 export default function Input({ isReadOnly, toDo }: IInput) {
     const checkStyles = "grid place-items-center border border-Light-Grayish-Blue h-[24px] aspect-square rounded-[50%] transition-colors "
-    const { addTodo, toDoList, toggleTodoCompleted, styleMode, removeTodo } = useContext(ToDoContext)
+    const { addTodo, toDoList, toggleTodoCompleted, removeTodo } = useContext(ToDoContext)
 
     const handleSubmit = (e: React.FormEvent<HTMLFormElement>) => {
         e.preventDefault()
@@ -29,12 +29,17 @@ export default function Input({ isReadOnly, toDo }: IInput) {
 
     const currentToDo = toDoList.find(todo => todo.id === toDo?.id)
 
+    const checkRoundedStyle = () => {
+        if (!isReadOnly) return 'rounded-md border-none'
+        if(currentToDo?.id == 1)  return 'rounded-t-md'
+       }
+
     return (
         <form onSubmit={handleSubmit} >
-            <div className='flex gap-4  bg-white py-3 px-4 rounded-t-md mb-7 border-b dark:bg-Very-Dark-Grayish-Blue'>
+            <div className={`flex gap-4 bg-white py-3 px-4 border-b border-b-Very-Light-Grayish-Blue dark:bg-Very-Dark-Grayish-Blue ${checkRoundedStyle()}`}>
                 <div onClick={() => toggleTodoCompleted(currentToDo?.id)} className={`${!currentToDo?.completed ? checkStyles : checkStyles + 'bg-gradient-to-r from-custom-start to-custom-end transition-colors'}`}>
                     {
-                        styleMode === 'dark' && currentToDo?.completed && (
+                        currentToDo?.completed && (
                             <img src={CheckIcon} alt="" className='aspect-square w-[11px]' />
                         )
                     }
