@@ -1,8 +1,24 @@
-function App() {
+import ToDoProvider from "./context/toDoProvider"
 
+/* Components Imports */
+import Header from "./components/header"
+import Form from "./components/Input"
+import Layout from "./components/Layout"
+import ToDoList from "./components/ToDoList"
+
+/* App Component */
+function App() {
   return (
     <>
-      <p className="text-3xl font-bold underline font-Josefin">todo app</p>
+      <ToDoProvider>
+        <div className="font-Josefin xl:py-28">
+          <Layout>
+            <Header />
+            <Form />
+            <ToDoList />
+          </Layout>
+        </div>
+      </ToDoProvider>
     </>
   )
 }
