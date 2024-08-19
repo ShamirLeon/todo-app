@@ -9,7 +9,8 @@ const initialContext: IToDoContext = {
     removeTodo: () => {},
     toggleStyleMode: () => {},
     toggleTodoCompleted: () => {},
-    clearCompleted: () => {}
+    clearCompleted: () => {},
+    filterToDoList: () => {}
 }
 
 export const ToDoContext = createContext<IToDoContext>(initialContext)
