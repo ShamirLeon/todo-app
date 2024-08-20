@@ -1,4 +1,4 @@
-import { useEffect, useState } from "react"
+import { useState } from "react"
 import { ToDoContext } from "./toDoContext"
 import { ITodo } from "../interfaces/interfaces"
 
