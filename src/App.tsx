@@ -11,7 +11,7 @@ function App() {
   return (
     <>
       <ToDoProvider>
-        <div className="font-Josefin xl:py-28">
+        <div className="font-Josefin">
           <Layout>
             <Header />
             <Form />
