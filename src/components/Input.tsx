@@ -17,7 +17,7 @@ export default function Input({ isReadOnly, toDo }: IInput) {
         e.preventDefault()
         const input = e.currentTarget[0] as HTMLInputElement
         const newTodo = {
-            id: toDoList.length + 1,
+            id: toDoList[toDoList.length - 1]?.id + 1 || 1,
             title: input.value,
             completed: false
         }
@@ -28,15 +28,21 @@ export default function Input({ isReadOnly, toDo }: IInput) {
     }
 
     const currentToDo = toDoList.find(todo => todo.id === toDo?.id)
+    const indexCurrentToDO = toDoList.findIndex((todo) => todo?.id === currentToDo?.id)
 
     const checkRoundedStyle = () => {
         if (!isReadOnly) return 'rounded-md border-none'
-        if(toDoList.findIndex((todo) => todo?.id === currentToDo?.id ) == 0)  return 'rounded-t-md'
-       }
+        if (indexCurrentToDO == 0) return 'rounded-t-md'
+        return ''
+    }
+
+    const animateEnter = () => {
+        if (isReadOnly) return `animate-enter`
+    }
 
     return (
         <form onSubmit={handleSubmit} >
-            <div className={`flex gap-4 bg-white py-3 px-4 border-b border-b-Very-Light-Grayish-Blue dark:bg-Very-Dark-Grayish-Blue ${checkRoundedStyle()}`}>
+            <div id={`to_do${currentToDo?.id}`} className={`flex gap-4 bg-white py-3 px-4 border-b border-b-Very-Light-Grayish-Blue dark:bg-Very-Dark-Grayish-Blue ${checkRoundedStyle()} ${animateEnter()}`} style={{animationDelay: `${indexCurrentToDO*0.1}s`}}>
                 <div onClick={() => toggleTodoCompleted(currentToDo?.id)} className={`${!currentToDo?.completed ? checkStyles : checkStyles + 'bg-gradient-to-r from-custom-start to-custom-end transition-colors'}`}>
                     {
                         currentToDo?.completed && (
@@ -49,9 +55,9 @@ export default function Input({ isReadOnly, toDo }: IInput) {
                         <input type="text" placeholder="Create a new todo..." className="w-full bg-transparent text-Very-Dark-Blue dark:text-white outline-none border-none" />
                     ) : (
                         <div className='flex justify-between items-center w-full dark:bg-Very-Dark-Grayish-Blue'>
-                            <span className={currentToDo?.completed ? 'line-through text-Light-Grayish-Blue' : 'dark:text-white'}>{currentToDo?.title} {currentToDo?.id}</span>
-                            <button onClick={()=> removeTodo(currentToDo?.id)}>
-                                <img src={CrossIcon} alt=" " className='w-4' /> 
+                            <span className={currentToDo?.completed ? 'line-through text-Light-Grayish-Blue' : 'dark:text-white'}>{currentToDo?.title}</span>
+                            <button onClick={() => removeTodo(currentToDo?.id)}>
+                                <img src={CrossIcon} alt=" " className='w-4' />
                             </button>
                         </div>
                     )

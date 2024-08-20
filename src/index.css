@@ -3,14 +3,50 @@
 @tailwind utilities;
 
 @keyframes fadeIn {
-    from {
-        opacity: 0;
-    }
-    to {
-        opacity: 1;
-    }
+  from {
+    opacity: 0;
+  }
+  to {
+    opacity: 1;
+  }
 }
 
-.animate-fadeIn {
-    animation: fadeIn 1s ease-in-out;
+@keyframes enter {
+  from {
+    opacity: 0;
+    transform: translateY(100%);
+  }
+  to {
+    transform: translateY(0);
+    opacity: 1;
+  }
 }
+
+@keyframes moveAndFade {
+    0% {
+      transform: translateY(0) translateX(0); /* Posición inicial */
+      opacity: 1; /* Opacidad inicial */
+    }
+    50% {
+      transform: translateY(20px) translateX(0); /* Desplaza un poco hacia abajo */
+      opacity: 1; /* Mantiene la opacidad */
+    }
+    100% {
+      transform: translateY(20px) translateX(100vw); /* Desplaza completamente a la derecha y hacia abajo */
+      opacity: 0; /* Cambia la opacidad a 0 */
+    }
+  }
+
+  .animate-fadeIn {
+    animation: fadeIn 1s ease-in-out;
+  }
+  
+  .animate-enter {
+    animation: enter 0.5s ease-in-out;
+  }
+  
+  .animate-moveAndFade {
+      animation: moveAndFade 0.5s ease-out;
+      animation-fill-mode: forwards;
+      z-index: 100;
+  }

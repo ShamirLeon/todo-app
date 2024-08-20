@@ -1,4 +1,4 @@
-import { useState } from "react"
+import { useEffect, useState } from "react"
 import { ToDoContext } from "./toDoContext"
 import { ITodo } from "../interfaces/interfaces"
 
@@ -30,10 +30,36 @@ export default function ToDoProvider({ children }: { children: React.ReactNode }
     }
 
     const removeTodo = (id?: number) => {
-        const newToDoList = toDoList.filter((todo) => todo.id !== id)
-        setToDoList(newToDoList)
-        setStorageToDoList(newToDoList)
-    }
+        const todo = document.getElementById(`to_do${id}`);
+
+        const removeElement = () => {
+            return new Promise((resolve) => {
+                if (todo) {
+                    // Aplicar la animación
+                    todo.classList.remove("animate-enter");
+                    todo.classList.add("animate-moveAndFade");
+                    // Esperar a que la animación termine antes de eliminar el elemento
+                    setTimeout(() => {
+                        // Eliminar el elemento del DOM
+                        if (todo) {
+                            todo.remove();
+                            resolve(true);
+                        }
+                    }, 500);
+                } else {
+                    resolve(false);
+                }
+            });
+        }
+
+        removeElement().then((isRemoved) => {
+            if (isRemoved) {
+                const newToDoList = toDoList.filter((todo) => todo.id !== id)
+                setToDoList(newToDoList)
+                setStorageToDoList(newToDoList)
+            }
+        });
+    };
 
     const toggleTodoCompleted = (id?: number) => {
         const newToDoList = toDoList.map((todo) => {
