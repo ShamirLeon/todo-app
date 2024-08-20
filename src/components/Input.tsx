@@ -1,5 +1,5 @@
 /* Imports Context */
-import { useContext } from 'react';
+import { useContext, useState } from 'react';
 import { ToDoContext } from '../context/toDoContext';
 
 /* Imports Images */
@@ -12,9 +12,13 @@ import { IInput } from '../interfaces/interfaces';
 export default function Input({ isReadOnly, toDo }: IInput) {
     const checkStyles = "grid place-items-center border border-Light-Grayish-Blue h-[24px] aspect-square rounded-[50%] transition-colors "
     const { addTodo, toDoList, toggleTodoCompleted, removeTodo } = useContext(ToDoContext)
+    const currentToDo = toDoList.find(todo => todo.id === toDo?.id)
+    const indexCurrentToDO = toDoList.findIndex((todo) => todo?.id === currentToDo?.id)
+    const [animationDelay, setAnimationDelay] = useState(indexCurrentToDO * 0.1)
 
     const handleSubmit = (e: React.FormEvent<HTMLFormElement>) => {
         e.preventDefault()
+        setAnimationDelay(0)
         const input = e.currentTarget[0] as HTMLInputElement
         const newTodo = {
             id: toDoList[toDoList.length - 1]?.id + 1 || 1,
@@ -27,8 +31,6 @@ export default function Input({ isReadOnly, toDo }: IInput) {
         input.value = ''
     }
 
-    const currentToDo = toDoList.find(todo => todo.id === toDo?.id)
-    const indexCurrentToDO = toDoList.findIndex((todo) => todo?.id === currentToDo?.id)
 
     const checkRoundedStyle = () => {
         if (!isReadOnly) return 'rounded-md border-none'
@@ -42,7 +44,11 @@ export default function Input({ isReadOnly, toDo }: IInput) {
 
     return (
         <form onSubmit={handleSubmit} >
-            <div id={`to_do${currentToDo?.id}`} className={`flex gap-4 bg-white py-3 px-4 border-b border-b-Very-Light-Grayish-Blue dark:bg-Very-Dark-Grayish-Blue ${checkRoundedStyle()} ${animateEnter()}`} style={{animationDelay: `${indexCurrentToDO*0.1}s`}}>
+            <div
+                id={`to_do${currentToDo?.id}`}
+                className={`flex gap-4 bg-white py-3 px-4 border-b border-b-Very-Light-Grayish-Blue dark:bg-Very-Dark-Grayish-Blue ${isReadOnly ? 'opacity-0' : null} ${checkRoundedStyle()} ${animateEnter()}`}
+                style={{ animationDelay: `${animationDelay}s` }}>
+
                 <div onClick={() => toggleTodoCompleted(currentToDo?.id)} className={`${!currentToDo?.completed ? checkStyles : checkStyles + 'bg-gradient-to-r from-custom-start to-custom-end transition-colors'}`}>
                     {
                         currentToDo?.completed && (
