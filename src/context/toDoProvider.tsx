@@ -36,6 +36,7 @@ export default function ToDoProvider({ children }: { children: React.ReactNode }
             return new Promise((resolve) => {
                 if (todo) {
                     // Aplicar la animación
+                    todo.style.zIndex = "999"
                     todo.classList.remove("animate-enter");
                     todo.classList.add("animate-moveAndFade");
                     // Esperar a que la animación termine antes de eliminar el elemento

@@ -52,7 +52,7 @@ export default function Input({ isReadOnly, toDo }: IInput) {
                 <div onClick={() => toggleTodoCompleted(currentToDo?.id)} className={`${!currentToDo?.completed ? checkStyles : checkStyles + 'bg-gradient-to-r from-custom-start to-custom-end transition-colors'}`}>
                     {
                         currentToDo?.completed && (
-                            <img src={CheckIcon} alt="" className='aspect-square w-[11px]' />
+                            <img src={CheckIcon} className='aspect-square w-[11px]' />
                         )
                     }
                 </div>
@@ -61,7 +61,7 @@ export default function Input({ isReadOnly, toDo }: IInput) {
                         <input type="text" placeholder="Create a new todo..." className="w-full bg-transparent text-Very-Dark-Blue dark:text-white outline-none border-none" />
                     ) : (
                         <div className='flex justify-between items-center w-full dark:bg-Very-Dark-Grayish-Blue'>
-                            <span className={currentToDo?.completed ? 'line-through text-Light-Grayish-Blue' : 'dark:text-white'}>{currentToDo?.title}</span>
+                            <span className={currentToDo?.completed ? 'line-through text-Light-Grayish-Blue transition-colors' : 'dark:text-white transition-colors'}>{currentToDo?.title}</span>
                             <button onClick={() => removeTodo(currentToDo?.id)}>
                                 <img src={CrossIcon} alt=" " className='w-4' />
                             </button>

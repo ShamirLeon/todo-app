@@ -18,7 +18,7 @@ export interface IToDoContext {
     filterToDoList: ({ filter }: { filter: 'all' | 'active' | 'completed' }) =>void;
 }
 export enum Breakpoints {
-    mobile = '375',
+    mobile = '425',
     desktop = '1440',
 }
 

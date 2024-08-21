@@ -23,31 +23,31 @@
 }
 
 @keyframes moveAndFade {
-    0% {
-      transform: translateY(0) translateX(0); /* Posición inicial */
-      opacity: 1; /* Opacidad inicial */
-    }
-    50% {
-      transform: translateY(20px) translateX(0); /* Desplaza un poco hacia abajo */
-      opacity: 1; /* Mantiene la opacidad */
-    }
-    100% {
-      transform: translateY(20px) translateX(100vw); /* Desplaza completamente a la derecha y hacia abajo */
-      opacity: 0; /* Cambia la opacidad a 0 */
-    }
+  0% {
+    transform: translateY(0) translateX(0); /* Posición inicial */
+    opacity: 1; /* Opacidad inicial */
   }
+  50% {
+    transform: translateY(-20px) translateX(0); /* Desplaza un poco hacia abajo */
+    opacity: 1; /* Mantiene la opacidad */
+  }
+  100% {
+    transform: translateY(-20px) translateX(32px); /* Desplaza a la derecha y hacia arriba */
+    opacity: 0; /* Cambia la opacidad a 0 */
+  }
+}
 
-  .animate-fadeIn {
-    animation: fadeIn 1s ease-in-out;
-  }
-  
-  .animate-enter {
-    animation: enter 0.5s ease-in-out;
-    animation-fill-mode: forwards;
-  }
-  
-  .animate-moveAndFade {
-      animation: moveAndFade 0.5s ease-out;
-      animation-fill-mode: forwards;
-      z-index: 100;
-  }
+.animate-fadeIn {
+  animation: fadeIn 1s ease-in-out;
+}
+
+.animate-enter {
+  animation: enter 0.5s ease-in-out;
+  animation-fill-mode: forwards;
+}
+
+.animate-moveAndFade {
+  animation: moveAndFade 0.5s ease-out;
+  animation-fill-mode: forwards;
+  z-index: 100;
+}
